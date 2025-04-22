@@ -14,17 +14,29 @@ import lombok.AllArgsConstructor;
 
 
 @RestController
-@RequestMapping("/api/research")
+@RequestMapping("/api/process")
 @CrossOrigin(origins = "*")
 @AllArgsConstructor
 public class ResearchController {
     private final ResearchService researchService;
 
-    @PostMapping("/process")
-    public ResponseEntity<String> processContent(@RequestBody ResearchRequest request){
+    @PostMapping("/summarize")
+    public ResponseEntity<String> summarizeContent(@RequestBody ResearchRequest request){
         String result = researchService.processContent(request);
-
         return ResponseEntity.ok(result);
     }
+
+    @PostMapping("/meaning")
+    public ResponseEntity<String> getMeaningOfContent(@RequestBody ResearchRequest request) {
+        String result = researchService.processContent(request);
+        return ResponseEntity.ok(result);
+    }
+
+    @PostMapping("/translate")
+    public ResponseEntity<String> translateContent(@RequestBody ResearchRequest request) {
+        String result = researchService.processContent(request);
+        return ResponseEntity.ok(result);
+    }
+    
 
 }

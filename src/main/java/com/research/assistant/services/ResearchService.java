@@ -85,8 +85,12 @@ public class ResearchService {
                 prompt.append("Provide a clear and concise summary of the following text:\n\n");
                 break;
             
-            case "suggest":
-                prompt.append("Based on the following content: suggest related topics and further reading. Format the response with clear headings and bullet points:  \n\n");
+            case "meaning":
+                prompt.append("Provide meaning of the following text: \n");
+                break;
+
+            case "translate":
+                prompt.append("Translate the following text to " +request.getLanguage() +" : \n");
                 break;
         
             default:
