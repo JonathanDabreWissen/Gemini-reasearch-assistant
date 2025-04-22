@@ -1,14 +1,12 @@
-# Use a base JDK image
-FROM openjdk:17-jdk-slim
-
-# Set working directory
+# Stage 1: Build the application
+FROM maven:3.9.4-eclipse-temurin-17 AS build
 WORKDIR /app
+COPY . .
+RUN mvn clean package -DskipTests
 
-# Copy the jar file (adjust the .jar name if needed)
-COPY target/*.jar app.jar
-
-# Expose port (Render will override this with $PORT)
+# Stage 2: Run the app
+FROM openjdk:17-jdk-slim
+WORKDIR /app
+COPY --from=build /app/target/*.jar app.jar
 EXPOSE 8080
-
-# Run the jar file
 CMD ["java", "-jar", "app.jar"]
